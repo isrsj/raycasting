@@ -29,7 +29,6 @@ public class GamePanel extends JPanel {
     private ArrayList<Point2D> puntoSombra;
     private ArrayList<Polygon> sombra;
     private ArrayList<Line2D> lineas;
-    private ArrayList<GradientPaint> difuminados;
     private int[] verticeSombraX, verticeSombraY;
     private int[] poligonoX, poligonoY;
     private int contadorCuadrosVisibles;
@@ -49,7 +48,6 @@ public class GamePanel extends JPanel {
         puntoSombra = new ArrayList<Point2D>();
         sombra = new ArrayList<Polygon>();
         lineas = new ArrayList<Line2D>();
-        difuminados = new ArrayList<GradientPaint>();
         verticeSombraX = new int[0];
         verticeSombraY = new int[0];
         poligonoX = new int[4];
