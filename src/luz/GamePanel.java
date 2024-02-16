@@ -1,7 +1,6 @@
 package luz;
 
 import java.awt.Color;
-import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.MultipleGradientPaint.CycleMethod;
@@ -238,30 +237,7 @@ public class GamePanel extends JPanel {
     }
 
     public int asignarInicio(int esquina) {
-        switch (esquina) {
-            case 0 -> {
-                return 0;
-            }
-            case 4 -> {
-                return 8;
-            }
-            case 8 -> {
-                return 16;
-            }
-            case 12 -> {
-                return 24;
-            }
-            case 16 -> {
-                return 32;
-            }
-            case 20 -> {
-                return 40;
-            }
-            case 24 -> {
-                return 48;
-            }
-        }
-        return 0;
+        return esquina * 2;
     }
 
     public void cursorEnEsquinaSuperiorDerecha(int cuadrante, int inicio, Graphics2D graphics2D) {
@@ -469,30 +445,7 @@ public class GamePanel extends JPanel {
     }
 
     public int asignarLugar(int inicio) {
-        switch (inicio) {
-            case 0 -> {
-                return 0;
-            }
-            case 8 -> {
-                return 2;
-            }
-            case 16 -> {
-                return 4;
-            }
-            case 24 -> {
-                return 6;
-            }
-            case 32 -> {
-                return 8;
-            }
-            case 40 -> {
-                return 10;
-            }
-            case 48 -> {
-                return 12;
-            }
-        }
-        return 0;
+        return inicio/4;
     }
 
     public void rellenarRectangulo(Graphics2D graphics2D, int inicio) {
@@ -504,30 +457,7 @@ public class GamePanel extends JPanel {
     }
 
     public int detectarRectangulo(int inicio) {
-        switch (inicio) {
-            case 0 -> {
-                return 0;
-            }
-            case 8 -> {
-                return 1;
-            }
-            case 16 -> {
-                return 2;
-            }
-            case 24 -> {
-                return 3;
-            }
-            case 32 -> {
-                return 4;
-            }
-            case 40 -> {
-                return 5;
-            }
-            case 48 -> {
-                return 6;
-            }
-        }
-        return 0;
+        return inicio/8;
     }
 
     public void llenarArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto) {
