@@ -10,9 +10,9 @@ public class Calculos {
 
     Constantes constantes = new Constantes();
     Mouse mouse = new Mouse();
-    
+
     public Calculos() {
-        
+
     }
 
     public double pendienteLinea(Point2D esquinaFigura, Point2D cursor) {
@@ -66,8 +66,8 @@ public class Calculos {
             }
         }
     }
-    
-    public double distanciaEntrePuntos(double x2, double y2){
-        return Math.sqrt(  Math.pow((x2-mouse.getxCursor()),2) + Math.pow((y2-mouse.getyCursor()),2));
+
+    public double distanciaEntrePuntos(double x2, double y2) {
+        return Math.sqrt(Math.pow((x2 - mouse.getxCursor()), 2) + Math.pow((y2 - mouse.getyCursor()), 2));
     }
 }

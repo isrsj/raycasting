@@ -1,7 +1,5 @@
 package luz;
 
-import java.awt.Cursor;
-import static java.awt.Cursor.HAND_CURSOR;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

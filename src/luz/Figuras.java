@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
  * @author jacob
  */
 public class Figuras {
-    
+
     private Rectangle2D rectangulo;
     private Line2D linea;
 
@@ -28,11 +28,11 @@ public class Figuras {
         linea = new Line2D.Double(xInicial, yInicial, xFinal, yFinal);
         return linea;
     }
-    
-    public Point2D nuevoPunto (double x, double y){
+
+    public Point2D nuevoPunto(double x, double y) {
         return new Point2D.Double(x, y);
     }
-    
+
     public Point2D puntoSuperiorDerecha(Rectangle2D rectangulo) {
         return new Point2D.Double(rectangulo.getX() + rectangulo.getWidth() - 1, rectangulo.getY());
     }
@@ -48,7 +48,7 @@ public class Figuras {
     public Point2D puntoInferiorIzquierda(Rectangle2D rectangulo) {
         return new Point2D.Double(rectangulo.getX(), rectangulo.getY() + rectangulo.getHeight() - 1);
     }
-    
+
     public Polygon poligonoSombra(int[] x, int[] y, int puntos) {
         return new Polygon(x, y, puntos);
     }

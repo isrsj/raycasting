@@ -211,11 +211,6 @@ public class GamePanel extends JPanel {
     }
 
     public void inicioSombra(Rectangle2D rectangulo, int i, Graphics2D graphics2D) {
-        // II II   SI SI   SD SD   ID ID
-        // II SI SD ID
-        // II SI SD ID
-        // II SI SD ID
-        // II SI SD ID
         switch (calculos.determinarCuadrante(rectangulo.getCenterX(), rectangulo.getCenterY(), mouse.getPuntoCursor())) {
             case 1 -> {// punto SD ----- 3 12
                 int cuadrante = calculos.determinarCuadrante(esquinaRectangulo.get(i + 2), mouse.getPuntoCursor());
@@ -240,55 +235,97 @@ public class GamePanel extends JPanel {
         return esquina * 2;
     }
 
+    public void sombraSuperiorDerechaInferiorDerecha(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio + 4, inicio + 5, inicio + 7, inicio + 6);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
+    public void sombraSuperiorIzquierdaSuperiorDerecha(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio + 2, inicio + 3, constantes.PUNTO_INFERIOR_IZQUIERDO, constantes.PUNTO_INFERIOR_DERECHO, inicio + 5, inicio + 4);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
+    public void sombraSuperiorIzquierdaInferiorDerecha(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio + 2, inicio + 3, inicio + 7, inicio + 6);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
+    public void sombraInferiorIzquierdaInferiorDerecha(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio, inicio + 1, constantes.PUNTO_SUPERIOR_IZQUIERDO, constantes.PUNTO_SUPERIOR_DERECHO, inicio + 7, inicio + 6);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
+    public void sombraSuperiorDerechaInferiorIzquierda(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio + 4, inicio + 5, inicio + 1, inicio);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
+    public void sombraSuperiorIzquierdaInferiorIzquierda(Graphics2D graphics2D, int inicio, int i) {
+        if (lineas.size() > asignarLugar(inicio) + 1) {
+            lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
+            lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
+        }
+        if (sombra.size() > i - 1) {
+            llenarArreglo(inicio + 2, inicio + 3, inicio + 1, inicio);
+            sombra.add(i, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
+            vaciarArreglo();
+            dibujarPoligono(graphics2D, i);
+        }
+    }
+
     public void cursorEnEsquinaSuperiorDerecha(int cuadrante, int inicio, Graphics2D graphics2D) {
-        //  E  P
-        // 0    II II   SI SI   SD SD   ID ID    8
-        // 8    II II   SI SI   SD SD   ID ID    16
-        // 16   II II   SI SI   SD SD   ID ID    24
-        // 24   II II   SI SI   SD SD   ID ID    32
-        // 32   II II   SI SI   SD SD   ID ID    40
-        // 40   II II   SI SI   SD SD   ID ID    48
-        // 49   II II   SI SI   SD SD   ID ID    56
         switch (cuadrante) {
             case 1 -> {// inicio sombra SI termina ID
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                llenarArreglo(inicio + 2, inicio + 3, inicio + 7, inicio + 6);
-                sombra.add(0, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                vaciarArreglo();
-                dibujarPoligono(graphics2D, 0);
+                sombraSuperiorIzquierdaInferiorDerecha(graphics2D, inicio, 0);
             }
             case 2 -> {// inicio sombra SI termina SD
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                }
-                if (sombra.size() > 0) {
-                    llenarArreglo(inicio + 2, inicio + 3, constantes.PUNTO_INFERIOR_IZQUIERDO, constantes.PUNTO_INFERIOR_DERECHO, inicio + 5, inicio + 4);
-                    sombra.add(1, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 1);
-                }
+                sombraSuperiorIzquierdaSuperiorDerecha(graphics2D, inicio, 1);
             }
             case 3 -> {
                 rellenarRectangulo(graphics2D, inicio);
             }
             case 4 -> {// inicio sombra SD termina ID
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                if (sombra.size() > 2) {
-                    llenarArreglo(inicio + 4, inicio + 5, inicio + 7, inicio + 6);
-                    sombra.add(3, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 3);
-                }
+                sombraSuperiorDerechaInferiorDerecha(graphics2D, inicio, 3);
             }
         }
     }
@@ -296,93 +333,30 @@ public class GamePanel extends JPanel {
     public void cursorEnEsquinaInferiorDerecha(int cuadrante, int inicio, Graphics2D graphics2D) {
         switch (cuadrante) {
             case 1 -> {// inicio sombra SD termina ID
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                llenarArreglo(inicio + 4, inicio + 5, inicio + 7, inicio + 6);
-                sombra.add(0, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                vaciarArreglo();
-                dibujarPoligono(graphics2D, 0);
+                sombraSuperiorDerechaInferiorDerecha(graphics2D, inicio, 0);
             }
             case 2 -> {
                 rellenarRectangulo(graphics2D, inicio);
             }
             case 3 -> {// inicio sombra II termina ID
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                if (sombra.size() > 1) {
-                    llenarArreglo(inicio, inicio + 1, constantes.PUNTO_SUPERIOR_IZQUIERDO, constantes.PUNTO_SUPERIOR_DERECHO, inicio + 7, inicio + 6);
-                    sombra.add(2, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 2);
-                }
+                sombraInferiorIzquierdaInferiorDerecha(graphics2D, inicio, 2);
             }
             case 4 -> {// inicio sombra SD termina II
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                }
-                if (sombra.size() > 2) {
-                    llenarArreglo(inicio + 4, inicio + 5, inicio + 1, inicio);
-                    sombra.add(3, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 3);
-                }
+                sombraSuperiorDerechaInferiorIzquierda(graphics2D, inicio, 3);
             }
         }
     }
 
     public void cursorEnEsquinaSuperiorIzquierda(int cuadrante, int inicio, Graphics2D graphics2D) {
-        //  E  P
-        // 0    II II   SI SI   SD SD   ID ID    8
-        // 8    II II   SI SI   SD SD   ID ID    16
-        // 16   II II   SI SI   SD SD   ID ID    24
-        // 24   II II   SI SI   SD SD   ID ID    32
-        // 32   II II   SI SI   SD SD   ID ID    40
-        // 40   II II   SI SI   SD SD   ID ID    48
         switch (cuadrante) {
             case 1 -> {// inicio sombra SI termina SD
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                }
-                llenarArreglo(inicio + 2, inicio + 3, constantes.PUNTO_INFERIOR_IZQUIERDO, constantes.PUNTO_INFERIOR_DERECHO, inicio + 5, inicio + 4);
-                sombra.add(0, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                vaciarArreglo();
-                dibujarPoligono(graphics2D, 0);
+                sombraSuperiorIzquierdaSuperiorDerecha(graphics2D, inicio, 0);
             }
             case 2 -> {// inicio sombra SD termina II
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 4], verticeSombraY[inicio + 4], verticeSombraX[inicio + 5], verticeSombraY[inicio + 5]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                }
-                if (sombra.size() > 0) {
-                    llenarArreglo(inicio + 4, inicio + 5, inicio + 1, inicio);
-                    sombra.add(1, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 1);
-                }
+                sombraSuperiorDerechaInferiorIzquierda(graphics2D, inicio, 1);
             }
             case 3 -> {// inicio sombra SI termina II
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                }
-                if (sombra.size() > 1) {
-                    llenarArreglo(inicio + 2, inicio + 3, inicio + 1, inicio);
-                    sombra.add(2, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 2);
-                }
+                sombraSuperiorIzquierdaInferiorIzquierda(graphics2D, inicio, 2);
             }
             case 4 -> {
                 rellenarRectangulo(graphics2D, inicio);
@@ -391,61 +365,24 @@ public class GamePanel extends JPanel {
     }
 
     public void cursorEnEsquinaInferiorIzquierda(int cuadrante, int inicio, Graphics2D graphics2D) {
-        //  E  P
-        // 0    II II   SI SI   SD SD   ID ID    8
-        // 8    II II   SI SI   SD SD   ID ID    16
-        // 16   II II   SI SI   SD SD   ID ID    24
-        // 24   II II   SI SI   SD SD   ID ID    32
-        // 32   II II   SI SI   SD SD   ID ID    40
-        // 40   II II   SI SI   SD SD   ID ID    48
         switch (cuadrante) {
             case 1 -> {
                 rellenarRectangulo(graphics2D, inicio);
             }
             case 2 -> {// inicio sombra SI termina II
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                }
-                if (sombra.size() > 0) {
-                    llenarArreglo(inicio + 2, inicio + 3, inicio + 1, inicio);
-                    sombra.add(1, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 1);
-                }
+                sombraSuperiorIzquierdaInferiorIzquierda(graphics2D, inicio, 1);
             }
             case 3 -> {// inicio sombra SI termina ID
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio + 2], verticeSombraY[inicio + 2], verticeSombraX[inicio + 3], verticeSombraY[inicio + 3]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                if (sombra.size() > 1) {
-                    llenarArreglo(inicio + 2, inicio + 3, inicio + 7, inicio + 6);
-                    sombra.add(2, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 2);
-                }
+                sombraSuperiorIzquierdaInferiorDerecha(graphics2D, inicio, 2);
             }
             case 4 -> {// inicio sombra II termina ID ---- arreglar sombra
-
-                if (lineas.size() > asignarLugar(inicio) + 1) {
-                    lineas.add(asignarLugar(inicio), figuras.nuevaLinea(verticeSombraX[inicio], verticeSombraY[inicio], verticeSombraX[inicio + 1], verticeSombraY[inicio + 1]));
-                    lineas.add(asignarLugar(inicio) + 1, figuras.nuevaLinea(verticeSombraX[inicio + 6], verticeSombraY[inicio + 6], verticeSombraX[inicio + 7], verticeSombraY[inicio + 7]));
-                }
-                if (sombra.size() > 2) {
-                    llenarArreglo(inicio, inicio + 1, constantes.PUNTO_SUPERIOR_IZQUIERDO, constantes.PUNTO_SUPERIOR_DERECHO, inicio + 7, inicio + 6);
-                    sombra.add(3, figuras.poligonoSombra(poligonoX, poligonoY, poligonoX.length));
-                    vaciarArreglo();
-                    dibujarPoligono(graphics2D, 3);
-                }
+                sombraInferiorIzquierdaInferiorDerecha(graphics2D, inicio, 3);
             }
         }
     }
 
     public int asignarLugar(int inicio) {
-        return inicio/4;
+        return inicio / 4;
     }
 
     public void rellenarRectangulo(Graphics2D graphics2D, int inicio) {
@@ -457,17 +394,12 @@ public class GamePanel extends JPanel {
     }
 
     public int detectarRectangulo(int inicio) {
-        return inicio/8;
+        return inicio / 8;
     }
 
     public void llenarArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto) {
         poligonoX = crearArreglo(verticeSombraX[primerPunto], verticeSombraX[segundoPunto], verticeSombraX[tercerPunto], verticeSombraX[cuartoPunto]);
         poligonoY = crearArreglo(verticeSombraY[primerPunto], verticeSombraY[segundoPunto], verticeSombraY[tercerPunto], verticeSombraY[cuartoPunto]);
-    }
-
-    public int[] crearArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto) {
-        int[] arreglo = {primerPunto, segundoPunto, tercerPunto, cuartoPunto};
-        return arreglo;
     }
 
     public void llenarArreglo(int primerPunto, int segundoPunto, Point2D tercerPunto, int cuartoPunto, int quintoPunto) {
@@ -477,16 +409,21 @@ public class GamePanel extends JPanel {
         poligonoY = crearArreglo(verticeSombraY[primerPunto], verticeSombraY[segundoPunto], toInteger(tercerPunto.getY()), verticeSombraY[cuartoPunto], verticeSombraY[quintoPunto]);
     }
 
-    public int[] crearArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto, int quintoPunto) {
-        int[] arreglo = {primerPunto, segundoPunto, tercerPunto, cuartoPunto, quintoPunto};
+    public void llenarArreglo(int primerPunto, int segundoPunto, Point2D tercerPunto, Point2D cuartoPunto, int quintoPunto, int sextoPunto) {
+        poligonoX = new int[6];
+        poligonoY = new int[6];
+        poligonoX = crearArreglo(verticeSombraX[primerPunto], verticeSombraX[segundoPunto], toInteger(tercerPunto.getX()), toInteger(cuartoPunto.getX()), verticeSombraX[quintoPunto], verticeSombraX[sextoPunto]);
+        poligonoY = crearArreglo(verticeSombraY[primerPunto], verticeSombraY[segundoPunto], toInteger(tercerPunto.getY()), toInteger(cuartoPunto.getY()), verticeSombraY[quintoPunto], verticeSombraY[sextoPunto]);
+    }
+
+    public int[] crearArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto) {
+        int[] arreglo = {primerPunto, segundoPunto, tercerPunto, cuartoPunto};
         return arreglo;
     }
 
-    public void llenarArreglo(int primerPunto, int segundoPunto, Point2D tercerPunto, Point2D cuartoPunto, int quintoPunto, int sextoPunto) {
-        poligonoX = new int[5];
-        poligonoY = new int[5];
-        poligonoX = crearArreglo(verticeSombraX[primerPunto], verticeSombraX[segundoPunto], toInteger(tercerPunto.getX()), toInteger(cuartoPunto.getX()), verticeSombraX[quintoPunto], verticeSombraX[sextoPunto]);
-        poligonoY = crearArreglo(verticeSombraY[primerPunto], verticeSombraY[segundoPunto], toInteger(tercerPunto.getY()), toInteger(cuartoPunto.getY()), verticeSombraY[quintoPunto], verticeSombraY[sextoPunto]);
+    public int[] crearArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto, int quintoPunto) {
+        int[] arreglo = {primerPunto, segundoPunto, tercerPunto, cuartoPunto, quintoPunto};
+        return arreglo;
     }
 
     public int[] crearArreglo(int primerPunto, int segundoPunto, int tercerPunto, int cuartoPunto, int quintoPunto, int sextoPunto) {
